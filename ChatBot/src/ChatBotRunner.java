@@ -21,7 +21,7 @@ public class ChatBotRunner
 		
 
 
-		while (!statement.equals("Bye"))
+		while (!statement.toLowerCase().equals("bye"))
 		{
 			System.out.println (chatbot1.getResponse(statement));
 			statement = in.nextLine();
