@@ -1,25 +1,118 @@
 
 public class ChatBotAhnaf {
 	int deepthoughts = 0;
-	public String startDiscussion()
+	int patience = 10;
+	int choice = 0;
+	int time = 0;
+	public String getGreeting()
 	{
-		return "What do you want to talk about today ?";
+		return "What do you want to talk about today? We can talk about space,time or reality.";
 	}
-	public String startResponse(String statement)
+	public String getResponse(String statement)
+	{
+		String section = "";
+		if(time == 0)
+		{	
+			section = firstResponse(statement);
+		}
+		else if(time == 1)
+		{	
+			section =  beginPath(statement);
+		}
+		else
+		{
+			section = "cool";
+			
+		}
+		return section;
+	}
+	public String firstResponse(String statement)
 	{
 		String response = "";
 		if(statement.length() == 0)
 		{
-			response = "We can talk about space,time, reality. Whatever you feel like";
+			response = "You alright?";
+			patience--;
 		}
-		else if(findKeyword(statement,"space") >= 0)
+		else if(findKeyword(statement,"space",0) >= 0)
+		{
+			response = "So you like space huh?";
+			choice = 1;
+		}
+		else if(findKeyword(statement,"time",0) >= 0)
+		{
+			response = "So you want to talk about time";
+			choice = 2;
+		}
+		else if(findKeyword(statement,"reality",0) >= 0)
+		{
+			response = "So you want to talk about reality";
+			choice = 3;
+		}
+		else
+		{
+			response = "Choose one of the other three please or you're going to have to leave.";
+			patience--;
+		}
+		time++;
+		return response;
+		
+	}
+	public String beginPath(String statement)
+	{
+		String response = "";
+		if(choice == 1)
 		{
 			response = spaceConversation(statement);
 		}
+		else if(choice == 2)
+		{
+			response = timeConversation(statement);
+		}
+		else 
+		{
+			response = realityConversation(statement);
+		}	
+		time++;
+		return response;
 	}
-	public String spaceConversation(String statement)
+	private String spaceConversation(String statement)
 	{
-		response = serh;
+		String response = "";
+		if(findKeyword(statement,"no",0) >= 0)
+		{
+			response = "Then what do want to talk about then time or reality?";
+		}
+		else if(findKeyword(statement,"yes",0) >= 0)
+		{
+			response = "Alright, I have always wondered about life out there, if there are aliens, what do you think of aliens.";
+		}
+		else
+		{
+			response = "Stop wasting my time!";
+			patience--;
+		}
+		return response;	
+	}
+	private String timeConversation(String statement)
+	{
+		String response = "";
+		response = "So you want to talk about time.";
+		if(findKeyword(statement,"no",0) >= 0)
+		{
+			response = "Then what do want to talk about then space or reality?";
+		}
+		return response;
+	}
+	private String realityConversation(String statement)
+	{
+		String response = "";
+		response = "So you want to talk about reality.";
+		if(findKeyword(statement,"no",0) >= 0)
+		{
+			response = "Then what do want to talk about then time or space?";
+		}
+		return response;
 	}
 	
 	private int findKeyword(String statement, String goal,int startPos)
