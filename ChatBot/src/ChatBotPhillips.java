@@ -57,6 +57,9 @@ public class ChatBotPhillips {
 				{
 					
 				}
+				else if(question == "noRes") {
+					response = "You can type 'Bye' to exit the chat bot.";
+				}
 				responded = true;
 			}
 			else
@@ -77,6 +80,10 @@ public class ChatBotPhillips {
 				else if(question == "interested") 
 				{
 					response = name+", I'm not sure that I can help you in that case. Might I reccomend another bot, such as Ahnaf's Existence Bot?";
+					question = "noRes";
+				}
+				else if(question == "noRes") {
+					response = "You can type 'Bye' to exit the chat bot.";
 				}
 
 				responded = true;
