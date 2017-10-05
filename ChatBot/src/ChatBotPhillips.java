@@ -72,6 +72,7 @@ public class ChatBotPhillips {
 					inRelationShip = false;
 					response = "Okay, that's fine. Are you interested in someone currently?";
 					question = "interested";
+					//
 				}
 				else if(question == "interested") 
 				{
