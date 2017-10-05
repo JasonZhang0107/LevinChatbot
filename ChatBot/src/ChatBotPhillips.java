@@ -1,21 +1,43 @@
 
 public class ChatBotPhillips {
 	public static String startConversation() {
-		return "Let me get to know a little about you. Is the person you are interested in a guy or a girl?";
+		return "Let me get to know a little about you. Are you in a relationship or not?";
 	}
 	public static String getResponse(String statement) {
-		String oGend = "";
+		int patience = 10;
+		boolean inRelationShip = false;
+		boolean responded = false;
 		String response = "";
+		while (!responded) {
 		if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			if(patience < 4)
+			{
+				response = "I need you to say something.";
+			}
+			else if (patience < 7)
+			{
+				response = "We can talk this out.";
+			}
+			else {
+				response = "Say something, please.";
+			}
+			if(patience > 0) {
+				patience--;
+			}
 		}
-		else if(findKeyword(statement, "guy") >= 0|| findKeyword(statement, "man")>= 0||findKeyword(statement, "boy")>=0||findKeyword(statement, "dude")>=0);
+		if(findKeyword(statement, "yes") >= 0|| findKeyword(statement, "yeah")>= 0||findKeyword(statement, "yep")>=0||findKeyword(statement, "kind of")>=0)
 		{
-			oGend = "male";
+			inRelationShip = true;
+			responded = true;
 		}
-		
+		else{
+			inRelationShip = false;
+			responded = true;
+		}
+		response = "";
 		return response;
+		}
 	}
 	private static int findKeyword(String statement, String goal)
 	{
