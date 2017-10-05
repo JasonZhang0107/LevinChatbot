@@ -1,43 +1,87 @@
 
 public class ChatBotPhillips {
-	public static String startConversation() {
-		return "Let me get to know a little about you. Are you in a relationship or not?";
+	public String startConversation() {
+		
+		return "Let me get to know a little about you. Can you tell me your name?";
 	}
-	public static String getResponse(String statement) {
-		int patience = 10;
-		boolean inRelationShip = false;
+	int patience = 10;
+	String name = "";
+	boolean inRelationShip = false;
+	String question = "name";
+	public String getResponse(String statement) 
+	{
 		boolean responded = false;
 		String response = "";
-		while (!responded) {
+		
+		while (!responded) 
+		{
 		if (statement.length() == 0)
-		{
-			if(patience < 4)
 			{
-				response = "I need you to say something.";
+				if(patience == 0) 
+				{
+					response = "Please.";
+				}
+				else if(patience < 4)
+				{
+					response = "I need you to say something.";
+				}
+				else if (patience < 7)
+				{
+					response = "We can talk this out.";
+					patience--;
+				}
+				else {
+					patience--;
+					response = "Say something, please.";
+				}
 			}
-			else if (patience < 7)
+			if(findKeyword(statement, "yes") >= 0|| findKeyword(statement, "yeah")>= 0||findKeyword(statement, "yep")>=0||findKeyword(statement, "kind of")>=0|| findKeyword(statement, "ye")>= 0|| findKeyword(statement, "sort of")>= 0)
 			{
-				response = "We can talk this out.";
+				if(question == "name")
+				{
+					name = statement;
+					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
+					question = "relations";
+				}
+				else if(question == "relations")
+					{
+						inRelationShip = true;
+						response = "Are you seeking advice on your relationship with this person?";
+						question = "interested";
+					}
+				else if(question == "interested"&&inRelationShip) 
+				{
+					response = "I hope I can help! What would you consider";
+				}
+				else if(question == "interested"&&!inRelationShip) 
+				{
+					
+				}
+				responded = true;
 			}
-			else {
-				response = "Say something, please.";
-			}
-			if(patience > 0) {
-				patience--;
-			}
+			else
+			{
+				if(question == "name")
+				{
+					name = statement;
+					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
+					question = "relations";
+				}
+				else if(question == "relations") 
+				{
+					inRelationShip = false;
+					response = "Okay, that's fine. Are you interested in someone currently?";
+					question = "interested";
+				}
+				else if(question == "interested") 
+				{
+					response = name+", I'm not sure that I can help you in that case. Might I reccomend another bot, such as Ahnaf's Existence Bot?";
+				}
+
+				responded = true;
+			}	
 		}
-		if(findKeyword(statement, "yes") >= 0|| findKeyword(statement, "yeah")>= 0||findKeyword(statement, "yep")>=0||findKeyword(statement, "kind of")>=0)
-		{
-			inRelationShip = true;
-			responded = true;
-		}
-		else{
-			inRelationShip = false;
-			responded = true;
-		}
-		response = "";
 		return response;
-		}
 	}
 	private static int findKeyword(String statement, String goal)
 	{
