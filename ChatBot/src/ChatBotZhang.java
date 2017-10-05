@@ -40,7 +40,7 @@ public class chatbotZhang
 			{
 				return positionOfWord;
 			}
-			
+			d
 			//letter is found before or after the keyword so look for next keyword
 			positionOfWord = sentence.indexOf(keyword, startPosition+1);
 		}
