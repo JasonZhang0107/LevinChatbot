@@ -19,6 +19,22 @@ public class ChatBotAhnaf {
 		{	
 			section =  beginPath(statement);
 		}
+		else if(time == 2)
+		{
+			section = alienThread(statement);
+		}
+		else if(time == 3)
+		{
+			section = lengthThread(statement);
+		}
+		else if(time == 4)
+		{
+			section = worldThread(statement);
+		}
+		else if(time == 5)
+		{
+			section = alienPositive(statement);
+		}
 		else
 		{
 			section = "cool";
@@ -54,7 +70,7 @@ public class ChatBotAhnaf {
 			response = "Choose one of the other three please or you're going to have to leave.";
 			patience--;
 		}
-		time++;
+		time = 1;
 		return response;
 		
 	}
@@ -73,9 +89,10 @@ public class ChatBotAhnaf {
 		{
 			response = realityConversation(statement);
 		}	
-		time++;
+		
 		return response;
 	}
+
 	private String spaceConversation(String statement)
 	{
 		String response = "";
@@ -86,6 +103,7 @@ public class ChatBotAhnaf {
 		else if(findKeyword(statement,"yes",0) >= 0)
 		{
 			response = "Alright, I have always wondered about life out there, if there are aliens, what do you think of aliens.";
+			time = 2;
 		}
 		else
 		{
@@ -94,6 +112,42 @@ public class ChatBotAhnaf {
 		}
 		return response;	
 	}
+	private String alienThread(String statement)
+	{
+		String response = "";
+		if(findKeyword(statement,"cool",0)>=0)
+		{
+			response = "I think that too. Personally I am excited to see aliens for the first time because they might be very interesting. How about you. ";
+			time = 5;
+		}
+		else if(findKeyword(statement,"I don't like",0)>=0)
+		{
+			response = "Why is that";
+			time = 6;
+		}
+		else if(findKeyword(statement,"interesting",0)>=0)
+		{
+			response = "Why do you think that";
+			time = 5;
+		}
+		else
+		{
+			response = "Are you ok.";
+			patience--;
+		}
+		
+		return response;
+	}
+	private String alienPositive(String statement)
+	{
+		String response = "";
+		if(findKeyword(statement,"interesting",0)>=0)
+		{
+			response = "Hmmm. Wha"
+		}
+		return response;
+	}
+	
 	private String timeConversation(String statement)
 	{
 		String response = "";
@@ -104,6 +158,11 @@ public class ChatBotAhnaf {
 		}
 		return response;
 	}
+	private String lengthThread(String statement)
+	{
+		String response = "";
+		return response;
+	}
 	private String realityConversation(String statement)
 	{
 		String response = "";
@@ -112,6 +171,11 @@ public class ChatBotAhnaf {
 		{
 			response = "Then what do want to talk about then time or space?";
 		}
+		return response;
+	}
+	private String worldThread(String statement)
+	{
+		String response = "";
 		return response;
 	}
 	
