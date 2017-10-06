@@ -32,15 +32,30 @@ public class ChatBotGuan {
 				response = "If you're not going to say something, leave.";
 			}
 
-			else if (findKeyword(statement, "no") >= 0)
+			else if (findKeyword(statement, "bye") >= 0)
 			{
-				response = "Fine, bye.";
-	                	emotion--;
+				if(emotion > 0)
+					response = "Thanks, I kinda feel better.";
+				else if(emotion <= 0)
+					response = "Wow, you're as uselsess as I am.";
 			}
+			
+			/*else if (findKeyword(statement, "no") >= 0)
+			{
+				if(statement.length() < 2)
+				{
+					response = "Fine, bye.";
+	                emotion--;
+				}
+	            else if(statement.length() > 2)
+	            {
+	            	response = transformNoStatement(statement);
+	            }
+			}*/
 			
 			else if (findKeyword(statement, "yes") >= 0)
 			{
-				response = "Fine, what is your name? And answer in complete sentences, so annoying.";
+				response = "Fine, what is your name? And answer in complete sentences, don't be annoying annoying.";
 	                	emotion++;
 			}
 			
@@ -54,6 +69,12 @@ public class ChatBotGuan {
 			{
 				response = "Then go away.";
 	                	emotion--;
+			}
+			
+			else if (findKeyword(statement, "you fell better") >= 0)
+			{
+				response = "I will never feel better.";
+	                	emotion++;
 			}
 			
 			else if (findKeyword(statement, "My name is", 0) >= 0)
@@ -73,7 +94,7 @@ public class ChatBotGuan {
 				response = transformIWantToStatement(statement);
 			}
 			
-			else if (findKeyword(statement, "I want",0) >= 0)
+			else if (findKeyword(statement, "I want", 0) >= 0)
 			{
 				response = transformIWantStatement(statement);
 			}	
@@ -83,6 +104,21 @@ public class ChatBotGuan {
 			}
 			
 			return response;
+		}
+		
+		private String transformNoStatement(String statement)
+		{
+			statement = statement.trim();
+			String lastChar = statement.substring(statement
+					.length() - 1);
+			if (lastChar.equals("."))
+			{
+				statement = statement.substring(0, statement
+						.length() - 1);
+			}
+			int psn = findKeyword (statement, "No I", 0);
+			String restOfStatement = statement.substring(psn + 4).trim();
+			return "No you, " + restOfStatement + "?";
 		}
 		
 		private String transformMyNameIsStatement(String statement)
@@ -272,7 +308,6 @@ public class ChatBotGuan {
 				"I don't think that is helpful",
 				"Do you really think so?",
 				"Maybe.",
-				"So, should I go for a walk?",
 				"Could you say that again?"
 		};
 		private String [] randomAngryResponses = {"You're of no help.", "Do you want to fight?", "Don't talk to me."};
