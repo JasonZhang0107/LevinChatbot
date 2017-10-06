@@ -6,18 +6,40 @@ import java.util.Random;
  * @author Mr. Levin and Jason Zhang
  * @version Created by Mr. Levin, modified and expanded by Jason
  */
-public class chatbotZhang
+public class ChatBotZhang
 {	
 	//emotion can alter the bot's responses and can be changed as the conversation progresses
 	int emotion = 0;
-	
+	/*
+	 * Description: Greets the user at the beginning of the conversation
+	 * Returns: A greeting
+	 */
+	public String getGreeting()
+	{
+		return "hi";
+	}
+	/*
+	 * Description: Responds to a user statement
+	 * Parameter: Statement that the user enters
+	 * Returns: A response based on what the user may/may not say
+	 */
+	public String getResponse(String statement)
+	{
+		String response = "";
+		
+		if(statement.length() == 0)
+		{
+			response = "Please say something!";
+		}
+		return response;
+	}
 	public int findKeyword(String statement, String keyword, int startPosition)
 	{
 		//makes sentence lowercase to compare
 		String sentence = statement.trim().toLowerCase();
 		
 		//makes keyword lowercase to compare
-		String keyword = keyword.toLowerCase();
+		keyword = keyword.toLowerCase();
 		
 		//position of the keyword in the sentence if found
 		int positionOfWord = sentence.indexOf(keyword, startPosition);
@@ -40,9 +62,9 @@ public class chatbotZhang
 			{
 				return positionOfWord;
 			}
-			d
 			//letter is found before or after the keyword so look for next keyword
 			positionOfWord = sentence.indexOf(keyword, startPosition+1);
 		}
+		return -1;
 	}
 }
