@@ -23,7 +23,7 @@ public class ChatBotPhillips {
 				}
 				else if(patience < 4)
 				{
-					response = "I need you to say something.";
+					response = "I need you to say something,"+name;
 				}
 				else if (patience < 7)
 				{
@@ -51,10 +51,12 @@ public class ChatBotPhillips {
 					}
 				else if(question == "interested"&&inRelationShip) 
 				{
-					response = "I hope I can help! What would you consider";
+					response = "I hope I can help! Are you having problems with your current relationship?";
+					question = "problems";
 				}
 				else if(question == "interested"&&!inRelationShip) 
 				{
+					response = "Great! Hopefully I can help. \nIs this person a close friend?";
 					
 				}
 				else if(question == "noRes") {
@@ -69,7 +71,12 @@ public class ChatBotPhillips {
 					name = statement;
 					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
 					question = "relations";
+					if(name.toLowerCase() == "levin")
+					{
+						response = "Oh, Mr. Levin! Sorry I didn't recognize you! You probably don't need relationship advice, but I'll ask anyway:\nAre you currently in a relationship with someone?";
+					}
 				}
+
 				else if(question == "relations") 
 				{
 					inRelationShip = false;
