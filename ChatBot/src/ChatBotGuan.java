@@ -55,11 +55,17 @@ public class ChatBotGuan {
 			
 			else if (findKeyword(statement, "yes") >= 0)
 			{
-				response = "Fine, what is your name? And answer in complete sentences, don't be annoying annoying.";
+				response = "Fine, what is your name? And answer in complete sentences, don't be so annoying.";
 	                	emotion++;
 			}
 			
 			else if (findKeyword(statement, "help you") >= 0)
+			{
+				response = "I failed my test today. What am I gonna do?";
+	                	emotion++;
+			}
+			
+			else if (findKeyword(statement, "help u") >= 0)
 			{
 				response = "I failed my test today. What am I gonna do?";
 	                	emotion++;
@@ -71,7 +77,7 @@ public class ChatBotGuan {
 	                	emotion--;
 			}
 			
-			else if (findKeyword(statement, "you fell better") >= 0)
+			else if (findKeyword(statement, "you feel better") >= 0)
 			{
 				response = "I will never feel better.";
 	                	emotion++;
