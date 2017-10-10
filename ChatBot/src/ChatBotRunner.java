@@ -60,6 +60,7 @@ public class ChatBotRunner
 				chosen = false;
 			}*/
 		ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
+		System.out.println(chatbot1.getGreeting());
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
@@ -68,7 +69,7 @@ public class ChatBotRunner
 			System.out.println (chatbot1.getResponse(statement));
 			statement = in.nextLine();
 		}
-		}
+		
 	
 	}
 	
