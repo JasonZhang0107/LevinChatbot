@@ -13,41 +13,63 @@ public class ChatBotRunner
 	 */
 	public static void main(String[] args)
 	{
-		boolean chosen = false;
+		/*boolean chosen = false;
 		System.out.print("Hello Sonny, which bot would you like to use?\n-Pick a number below.\n\n1-Existence Bot\n2-Fitness Bot\n3-Romance Bot\n4-TherapistThatNeedsTherapy Bot");
-		Scanner bot = new Scanner (System.bot);
-		String response = bot.nextLine();
+		Scanner in = new Scanner (System.in);
+		String response = in.nextLine();
 		
 		while(!chosen) {
 			chosen = true;
-			if() {
+			if(response == "1") {
+				ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
+				//ChatBotPhillips chatbot2 = new ChatBotPhillips();
+				
+				System.out.println (chatbot1.getGreeting());
+				String statement = in.nextLine();
+				
+
+
+				while (!statement.toLowerCase().equals("bye"))
+				{
+					System.out.println (chatbot1.getResponse(statement));
+					statement = in.nextLine();
+				}
 			}
-			if() {
+			else if(response == "2") {
+				ChatBotPhillips chatbot2 = new ChatBotPhillips();
+				
+				System.out.println (chatbot2.getGreeting());
+				String statement = in.nextLine();
+				
+
+
+				while (!statement.toLowerCase().equals("bye"))
+				{
+					System.out.println (chatbot2.getResponse(statement));
+					statement = in.nextLine();
+				}
 			}
-			if() {
+			else if(response == "3") {
+				//
 			}
-			if() {
+			else if(response == "4") {
+				//
 			}
 			else {
 				System.out.println("Please choose a number");
 				chosen = false;
-			}
-		}
-		ChatBotPhillips chatbot2 = new ChatBotPhillips();
+			}*/
 		ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
-		//ChatBotPhillips chatbot2 = new ChatBotPhillips();
-		
-		System.out.println (chatbot1.getGreeting());
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
-
-
 		while (!statement.toLowerCase().equals("bye"))
 		{
 			System.out.println (chatbot1.getResponse(statement));
 			statement = in.nextLine();
 		}
+		}
+	
 	}
 	
 
