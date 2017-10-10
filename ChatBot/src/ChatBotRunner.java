@@ -17,6 +17,7 @@ public class ChatBotRunner
 		System.out.print("Hello Sonny, which bot would you like to use?\n-Pick a number below.\n\n1-Existence Bot\n2-Fitness Bot\n3-Romance Bot\n4-TherapistThatNeedsTherapy Bot");
 		Scanner bot = new Scanner (System.bot);
 		String response = bot.nextLine();
+		
 		while(!chosen) {
 			chosen = true;
 			if() {
