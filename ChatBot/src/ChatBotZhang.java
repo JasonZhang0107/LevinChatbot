@@ -186,12 +186,11 @@ public class ChatBotZhang
 		questionType = "workoutType";
 		return response;
 	}
-	/*Public String workoutTypeResponse(statement)
+	Public String workoutTypeResponse(statement)
 	{
 		if(findKeyword(statement, "nutrition") == false || findKeyword(statement, "workout") == false)
 		{
 			response = ""
 		}
 	}
-	*/
 }
