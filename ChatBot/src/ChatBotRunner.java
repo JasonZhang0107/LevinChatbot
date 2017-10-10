@@ -13,7 +13,28 @@ public class ChatBotRunner
 	 */
 	public static void main(String[] args)
 	{
-		ChatBotLevin chatbot1 = new ChatBotLevin();
+		boolean chosen = false;
+		System.out.print("Hello Sonny, which bot would you like to use?\n-Pick a number below.\n\n1-Existence Bot\n2-Fitness Bot\n3-Romance Bot\n4-TherapistThatNeedsTherapy Bot");
+		Scanner bot = new Scanner (System.bot);
+		String response = bot.nextLine();
+		while(!chosen) {
+			chosen = true;
+			if() {
+			}
+			if() {
+			}
+			if() {
+			}
+			if() {
+			}
+			else {
+				System.out.println("Please choose a number");
+				chosen = false;
+			}
+		}
+		ChatBotPhillips chatbot2 = new ChatBotPhillips();
+		ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
+		//ChatBotPhillips chatbot2 = new ChatBotPhillips();
 		
 		System.out.println (chatbot1.getGreeting());
 		Scanner in = new Scanner (System.in);
@@ -27,5 +48,6 @@ public class ChatBotRunner
 			statement = in.nextLine();
 		}
 	}
+	
 
 }
