@@ -1,6 +1,6 @@
 
 public class ChatBotPhillips {
-	public String startConversation() {
+	public String getGreeting() {
 		
 		return "Let me get to know a little about you. Can you tell me your name?";
 	}

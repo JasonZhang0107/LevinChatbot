@@ -8,15 +8,39 @@ import java.util.Random;
  */
 public class ChatBotZhang
 {	
+	//global string that changes depending on the conversation
+	String response = "";
+	
 	//emotion can alter the bot's responses and can be changed as the conversation progresses
+	// emotion starts at 5, can go to as low as 0 or as high as 10
 	int emotion = 0;
+	
+	//user name
+	String name = "";
+	
+	//question type so the bot knows how to respond
+	String questionType = "";
+	
+	//chatbot's memory
+	public String [] chatbotMemory = {};
+	
+	//List of strings that would prompt the user to switch to another chatbot
+	public String [] suggestSidneyBot = 
+		{
+				"crush",
+				"romance",
+				"love",
+				"cute",
+				"affection",
+		};
 	/*
 	 * Description: Greets the user at the beginning of the conversation
 	 * Returns: A greeting
 	 */
 	public String getGreeting()
 	{
-		return "hi";
+		questionType = "name";
+		return "Hello my name is Connor, what is your name?";
 	}
 	/*
 	 * Description: Responds to a user statement
@@ -27,11 +51,19 @@ public class ChatBotZhang
 	{
 		String response = "";
 		
-		if(statement.length() == 0)
+		if(questionType == "name")
 		{
-			response = "Please say something!";
+			response = nameResponse(statement);
+		}
+		else if(questionType == "goal")
+		{
+			response = goalResponse(statement);
 		}
 		return response;
+	}
+	public int findKeyword(String statement, String keyword)
+	{
+		return findKeyword(statement, keyword, 0);
 	}
 	public int findKeyword(String statement, String keyword, int startPosition)
 	{
@@ -66,5 +98,99 @@ public class ChatBotZhang
 			positionOfWord = sentence.indexOf(keyword, startPosition+1);
 		}
 		return -1;
+	}
+	/*
+	 * Description: Determines whether or not a keyword is found
+	 * Parameter: Statement that the user enters and keyword that is being searched
+	 * Returns: True if keyword found, false is not found
+	 */
+	public boolean isKeywordFound(String statement, String keyword)
+	{
+		if(findKeyword(statement, keyword) == -1)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	//takes their name in and gives a response
+	public String nameResponse(String statement)
+	{
+		name = statement;
+		response = "Hello " +name+ " what are your fitness goals?\nIt can be anything from losing weight to gaining muscle";
+		questionType = "goal";
+		
+		return response;
+	}
+	//takes in their statement looking for the words gain, gaining, lose, and losing to prompt a response associated with each specific one
+	public String goalResponse(String statement)
+	{
+		String goal = "";
+		//if neither gain or lose is found, it will prompt the user to give another statement
+		if(isKeywordFound(statement, "gain") == false && isKeywordFound(statement,"lose")==false && isKeywordFound(statement,"losing")==false && isKeywordFound(statement,"gaining")==false)
+		{
+			response = "Sorry man, I couldn't understand what you said. Can you tell me in simpler terms what your goal is.";
+		}
+		else
+		{
+			if(isKeywordFound(statement, "gain"))
+			{
+				int positionOfWord = findKeyword(statement, "gain");
+				goal = statement.substring(positionOfWord + 5);
+				
+				response = "Alright then, so you want to gain " +goal+ ".\nDo you want to learn more about nutrition or perhaps a workout plan";
+			}
+			if(isKeywordFound(statement, "gaining"))
+			{
+				int positionOfWord = findKeyword(statement, "gaining");
+				goal = statement.substring(positionOfWord + 8);
+				
+				response = "Alright then, so you want to gain " +goal+ ".\nDo you want to learn more about nutrition or perhaps a workout plan";
+			}
+			if(isKeywordFound(statement, "lose"))
+			{
+				int positionOfWord = findKeyword(statement, "lose");
+				goal = statement.substring(positionOfWord + 5);
+				
+				response = "Alright then, so you want to lose " +goal+ ".\nDo you want to learn more about nutrition or perhaps a workout plan";
+			}
+			if(isKeywordFound(statement, "losing"))
+			{
+				int positionOfWord = findKeyword(statement, "losing");
+				goal = statement.substring(positionOfWord + 7);
+				
+				response = "Alright then, so you want to lose " +goal+ ".\nDo you want to learn more about nutrition or perhaps a workout plan";
+			}
+			//if both gain and lose is found, it will return a response incorporating both of what the user wants
+			//this if statement needs to be placed at the end to overwrite the other two is conditions are met
+			if(isKeywordFound(statement, "gain") && isKeywordFound(statement,"lose"))
+			{
+				int positionOfWordGain = findKeyword(statement, "gain");
+				String goalGain = statement.substring(positionOfWordGain + 5);
+				
+				int positionOfWordLose = findKeyword(statement, "lose");
+				String goalLose = statement.substring(positionOfWordLose + 5);
+				
+				if(positionOfWordGain > positionOfWordLose)
+				{
+					response = "Alright then so you want to lose " +goalLose+ ".\nDo you want to learn more about nutrition or perhaps a workout plan";
+				}
+				else
+				{
+					response = "Alright then so you want to gain " +goalGain+ ".\nDo you want to learn more about nutrition or perhaps a workout plan";
+				}
+			}
+		}
+		questionType = "workoutType";
+		return response;
+	}
+	Public String workoutTypeResponse(statement)
+	{
+		if(findKeyword(statement, "nutrition") == false || findKeyword(statement, "workout") == false)
+		{
+			response = ""
+		}
 	}
 }
