@@ -18,6 +18,9 @@ public class ChatBotZhang
 	//user name
 	String name = "";
 	
+	//user goal
+	String goal = "";
+	
 	//question type so the bot knows how to respond
 	String questionType = "";
 	
@@ -58,6 +61,21 @@ public class ChatBotZhang
 		else if(questionType == "goal")
 		{
 			response = goalResponse(statement);
+		}
+		return response;
+	}
+	public String getResponseBasedOnEmotion(String response)
+	{
+		if(emotion < 1)
+		{
+			String angryResponse = response.toUpperCase() + "!!!!";
+		}
+		if(emotion == 0)
+		{
+		}
+		if(emotion > 1)
+		{
+			String niceResponse = response + " It'd really help me out to understad you.";		
 		}
 		return response;
 	}
@@ -127,11 +145,12 @@ public class ChatBotZhang
 	//takes in their statement looking for the words gain, gaining, lose, and losing to prompt a response associated with each specific one
 	public String goalResponse(String statement)
 	{
-		String goal = "";
 		//if neither gain or lose is found, it will prompt the user to give another statement
 		if(isKeywordFound(statement, "gain") == false && isKeywordFound(statement,"lose")==false && isKeywordFound(statement,"losing")==false && isKeywordFound(statement,"gaining")==false)
 		{
-			response = "Sorry man, I couldn't understand what you said. Can you tell me in simpler terms what your goal is.";
+			String returnStatement = "Sorry man, I couldn't understand what you said. Can you tell me in simpler terms what your goal is.";
+			response = getResponseBasedOnEmotion(returnStatement);
+			emotion = emotion -1;
 		}
 		else
 		{
@@ -186,11 +205,45 @@ public class ChatBotZhang
 		questionType = "workoutType";
 		return response;
 	}
-	Public String workoutTypeResponse(statement)
+	public String workoutTypeResponse(String statement)
 	{
-		if(findKeyword(statement, "nutrition") == false || findKeyword(statement, "workout") == false)
+		if(isKeywordFound(statement, "nutrition") == false || isKeywordFound(statement, "workout") == false)
 		{
-			response = ""
+			String returnStatement = "I asked if you wanted to learn about nutrition or workout plan.\nIf your not interested just say bye.";
+			emotion = emotion -1;
+			response = getResponseBasedOnEmotion(returnStatement);
 		}
+		else
+		{
+			if(isKeywordFound(statement, "nutrition"))
+			{
+				if(isKeywordFound(goal, "gain") || isKeywordFound(goal, "gaining"))
+				{
+					response = "The key to gaining muscle is to eat in a caloric surplus.\n Your muscles need more calories than your maintence for growth";
+				}
+				else
+				{
+					if(isKeywordFound(goal, "lose") || isKeywordFound(goal, "losing"))
+					{
+						response = "The key to losing fat is to eat in a caloric deficit, when you consume less than you need, you will lose weight";
+					}
+				}
+			}
+			if(isKeywordFound(statement, "workout"))
+			{
+				if(isKeywordFound(goal, "gain") || isKeywordFound(goal, "gaining"))
+				{
+					response = "The key to gaining muscle in a workout is strength training, I would suggest 5 days a week";
+				}
+				else
+				{
+					if(isKeywordFound(goal, "lose") || isKeywordFound(goal, "losing"))
+					{
+						response = "The key to losing fat for a workout plan is doing cardio. HIIT cardio for 20 minutes each session is highly effective";
+					}
+				}
+			}
+		}
+		return response;
 	}
 }

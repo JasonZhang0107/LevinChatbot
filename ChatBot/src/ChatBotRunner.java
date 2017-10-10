@@ -68,9 +68,6 @@ public class ChatBotRunner
 			System.out.println (chatbot1.getResponse(statement));
 			statement = in.nextLine();
 		}
-		}
-	
 	}
 	
-
 }
