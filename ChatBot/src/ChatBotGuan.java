@@ -53,22 +53,21 @@ public class ChatBotGuan {
 	            }
 			}*/
 			
-			else if (findKeyword(statement, "yes") >= 0)
+			else if (findKeyword(statement, "yes") >= 0 || findKeyword(statement, "ye") >= 0 || findKeyword(statement, "yeah") >= 0)
 			{
 				response = "Fine, what is your name? And answer in complete sentences, don't be so annoying.";
-	                	emotion++;
 			}
 			
-			else if (findKeyword(statement, "help you") >= 0)
+			else if (findKeyword(statement, "no") >= 0)
 			{
-				response = "I failed my test today. What am I gonna do?";
-	                	emotion++;
+				response = "Then go away.";
+	                	emotion--;
 			}
 			
-			else if (findKeyword(statement, "help u") >= 0)
+			else if (findKeyword(statement, "help you") >= 0 || findKeyword(statement, "help u") >= 0 || 
+					findKeyword(statement, "feeling today") >= 0 || findKeyword(statement, "happened today") >= 0)
 			{
 				response = "I failed my test today. What am I gonna do?";
-	                	emotion++;
 			}
 			
 			else if (findKeyword(statement, "I don't know") >= 0)
@@ -83,6 +82,18 @@ public class ChatBotGuan {
 	                	emotion++;
 			}
 			
+			else if (findKeyword(statement, "study") >= 0)
+			{
+				response = "I don't like studying.";
+	                	emotion--;
+			}
+			
+			else if (findKeyword(statement, "advice") >= 0)
+			{
+				response = "Like what?";
+	                	emotion++;
+			}
+			
 			else if (findKeyword(statement, "My name is", 0) >= 0)
 			{
 				response = transformMyNameIsStatement(statement);
@@ -90,7 +101,14 @@ public class ChatBotGuan {
 			
 			else if (findKeyword(statement, "Maybe you can", 0) >= 0)
 			{
-				response = "I don't want to.";
+				response = transformMaybeYouCanStatement(statement);
+				emotion++;
+			}
+			
+			else if (findKeyword(statement, "maybe") >= 0)
+			{
+				response = "So is it a yes or a no?";
+	                	emotion--;
 			}
 
 			// Response transforming I want to statement
@@ -139,9 +157,23 @@ public class ChatBotGuan {
 			}
 			int psn = findKeyword (statement, "My name is", 0);
 			String restOfStatement = statement.substring(psn + 10).trim();
-			return "Nice to meet you, " + restOfStatement;
+			return "How do you plan to help me, " + restOfStatement + "?";
 		}
 		
+		private String transformMaybeYouCanStatement(String statement)
+		{
+			statement = statement.trim();
+			String lastChar = statement.substring(statement
+					.length() - 1);
+			if (lastChar.equals("."))
+			{
+				statement = statement.substring(0, statement
+						.length() - 1);
+			}
+			int psn = findKeyword (statement, "Maybe you can", 0);
+			String restOfStatement = statement.substring(psn + 13).trim();
+			return "I don't want to " + restOfStatement + ".";
+		}
 		/**
 		 * Take a statement with "I want to <something>." and transform it into 
 		 * "Why do you want to <something>?"
