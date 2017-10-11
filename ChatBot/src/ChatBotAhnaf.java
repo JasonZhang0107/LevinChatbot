@@ -418,7 +418,7 @@ public class ChatBotAhnaf {
 		String response = "";
 		if((findKeyword(statement,"crazy",0)>=0)||(findKeyword(statement,"strange",0)>=0))
 		{
-			response = "Am I not wrong";
+			response = "Am I not wrong?";
 			time = 16;
 		}
 		else
