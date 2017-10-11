@@ -11,6 +11,14 @@ public class ChatBotAhnaf {
 	public String getResponse(String statement)
 	{
 		String section = "";
+		if(patience <= 5)
+		{
+			time = 17;
+		}
+		if(deepthoughts == 3)
+		{
+			time = 18;
+		}
 		if(time == 0)
 		{	
 			section = firstResponse(statement);
@@ -25,7 +33,7 @@ public class ChatBotAhnaf {
 		}
 		else if(time == 3)
 		{
-			section = lengthThread(statement);
+			section = lifelengthThread(statement);
 		}
 		else if(time == 4)
 		{
@@ -34,6 +42,58 @@ public class ChatBotAhnaf {
 		else if(time == 5)
 		{
 			section = alienPositive(statement);
+		}
+		else if(time == 6)
+		{
+			section = alienNegative(statement);
+		}
+		else if(time == 7)
+		{
+			section = alienPositivetwo(statement);
+		}
+		else if(time == 8)
+		{
+			section = alienPositivethree(statement);
+		}
+		else if(time == 9)
+		{
+			section = lifePositive(statement);
+		}
+		else if(time == 10)
+		{
+			section = lifePositivecont(statement);
+		}
+		else if(time == 11)
+		{
+			section = lifePositivetwo(statement);
+		}
+		else if(time == 12)
+		{
+			section = lifePositivethree(statement);
+		}
+		else if(time == 13)
+		{
+			section = worldThreadcont(statement);
+		}
+		else if(time == 14)
+		{
+			section = worldThreadtwo(statement);
+		}
+		else if(time == 15)
+		{
+			section = worldThreadthree(statement);
+		}
+		else if(time == 16)
+		{
+			section = realityEnd(statement);
+		}
+		else if(time == 17)
+		{
+			section = noPatience();
+		}
+		else if(time == 18)
+		{
+			section = goodThoughts();
 		}
 		else
 		{
@@ -99,6 +159,7 @@ public class ChatBotAhnaf {
 		if(findKeyword(statement,"no",0) >= 0)
 		{
 			response = "Then what do want to talk about then time or reality?";
+			time = 0;
 		}
 		else if(findKeyword(statement,"yes",0) >= 0)
 		{
@@ -107,7 +168,8 @@ public class ChatBotAhnaf {
 		}
 		else
 		{
-			response = "Stop wasting my time!";
+			response = "Stop wasting my time!Choose something else then";
+			time = 0;
 			patience--;
 		}
 		return response;	
@@ -132,7 +194,8 @@ public class ChatBotAhnaf {
 		}
 		else
 		{
-			response = "Are you ok.";
+			response = "Stop wasting my time!Choose something else then";
+			time = 0;
 			patience--;
 		}
 		
@@ -143,25 +206,147 @@ public class ChatBotAhnaf {
 		String response = "";
 		if(findKeyword(statement,"interesting",0)>=0)
 		{
-			response = "Hmmm. Wha"
+			response = "Hmmm. What do you think is so interesting";
+			time = 7;
+		}
+		else if(findKeyword(statement,"cool",0)>=0)
+		{
+			response = "What do you think is so cool about space";
+			time = 7;
+		}
+		else
+		{
+			response = "Stop wasting my time!Choose something else then";
+			time = 0;
+			patience--;
 		}
 		return response;
+	}
+	private String alienPositivetwo(String statement)
+	{
+		String response = "";
+		if(findKeyword(statement,"space",0)>=0)
+		{
+			response = "Do you think humans will ever go to space";
+			time = 8;
+		}
+		else if(findKeyword(statement,"don't",0)>=0)
+		{
+			response = "Let's change the topic, time or reality";
+			time = 0;
+		}
+		else
+		{
+			response = "Stop wasting my time!Choose something else then";
+			time = 0;
+			patience--;
+		}
+		return response;
+	}
+	private String alienPositivethree(String statement)
+	{
+		time = 0;
+		deepthoughts++;
+		return "Good,I think we need to talk about another topic, choose time or reality or leave";
+	}
+	private String alienNegative(String statement)
+	{
+		time = 0;
+		return "I think we need to talk about another topic, choose time or reality or leave";
 	}
 	
 	private String timeConversation(String statement)
 	{
 		String response = "";
-		response = "So you want to talk about time.";
 		if(findKeyword(statement,"no",0) >= 0)
 		{
 			response = "Then what do want to talk about then space or reality?";
+			time = 0;
+		}
+		else if(findKeyword(statement,"yes",0)>=0)
+		{
+			response = "I'm sorry if this might get a little sad, but time always seems to go by so fast. Are you scared of running out of time";
+			time = 3;
+		}
+		else
+		{
+			response = "Stop wasting my time!Choose something else then";
+			time = 0;
+			patience--;
 		}
 		return response;
 	}
-	private String lengthThread(String statement)
+	private String lifelengthThread(String statement)
 	{
 		String response = "";
+		if(findKeyword(statement,"yes",0)>=0)
+		{
+			response = "What exactly are you afraid of losing";
+			time = 9;
+		}
+		else if((findKeyword(statement,"scared",0)>=0)||(findKeyword(statement,"afraid",0)>=0))
+		{
+			response = "Why are you afraid of losing that";
+			time = 9;
+		}
+		else
+		{
+			time = 0;
+			patience--;
+			return "If you want help you should talk, choose something else or leave, I don't care anymore";
+		}
 		return response;
+	}
+	private String lifePositive(String statement)
+	{
+		String response = "";
+		if((findKeyword(statement,"sad",0)>=0) || (findKeyword(statement,"depressed",0)>=0))
+		{
+			response = "Continue, it's ok";
+			time = 10;
+		}
+		else if((findKeyword(statement,"I don't",0)>=0))
+		{
+			response = "Try to think, why, you feel that way";
+			time = 11;
+		}
+		else
+		{
+			time = 0;
+			response = "I think we need to talk about another topic, choose space or reality or leave";
+		}
+		return response;
+	}
+	private String lifePositivecont(String statement)
+	{
+		time = 0;	
+		return "I think we made some good progress, so you can leave or we can discuss another topic";
+	}
+	private String lifePositivetwo(String statement)
+	{
+		String response = "";
+		if(findKeyword(statement,"feel",0) >= 0)
+		{
+			response = "Continue I think you are getting it";
+			time = 10;
+		}
+		else if(findKeyword(statement,"I don't know",0) >= 0)
+		{
+			response = "I need you to figure it out";
+			time = 12;
+		}
+		else
+		{
+			time = 0;
+			response = "I think we need to talk about another topic, choose space or reality or leave";
+		}
+		return response;
+	}
+	private String lifePositivethree(String statement)
+	{
+		time = 0;
+		deepthoughts++;
+		return "Wow that was very eye opening for both of us, thank you for sharing. Choose another topic or leave";
 	}
 	private String realityConversation(String statement)
 	{
@@ -170,15 +355,108 @@ public class ChatBotAhnaf {
 		if(findKeyword(statement,"no",0) >= 0)
 		{
 			response = "Then what do want to talk about then time or space?";
+			time = 0;
+		}
+		else if(findKeyword(statement,"yes",0) >= 0)
+		{
+			response = "Have you ever wondered if we are living in a computer simulation like the Matrix movies";
+			time = 4;
+		}
+		else
+		{
+			response = "Really, you're going to play this game, ok.Choose something else or leave.";
+			time = 0;
+			patience--;
 		}
 		return response;
 	}
 	private String worldThread(String statement)
 	{
 		String response = "";
+		if(findKeyword(statement,"matrix",0) >= 0)
+		{
+			response = "I don't care about the Matrix movies! I just wanna talk about the concept about a simulation so do you think we are";
+			time = 4;
+			patience--;
+		}
+		else if(findKeyword(statement,"yes",0) >= 0)
+		{
+			response = "Why do you think that";
+			time = 13;
+		}
+		else
+		{
+			response = "I'm getting irritated by your crap we are changing the topic. Choose space or time";
+			time = 0;
+			patience--;
+		}
 		return response;
 	}
-	
+	private String worldThreadcont(String statement)
+	{
+		String response = "";
+		if((findKeyword(statement,"scary",0) >= 0)||(findKeyword(statement,"strange",0) >= 0))
+		{
+			response = "Personally I think that it would be great if a simulation was the case because then I would have someone to blame my problems on the programmers. Also if there is a god then I can blame my problems and mistakes on god because it decided my life for me. Do you agree";
+			time = 14;
+		}
+		else if((findKeyword(statement,"interesting",0) >= 0) || (findKeyword(statement,"cool",0) >= 0))
+		{
+			response = "I agree but why do you think that";
+			time = 15;
+		}
+		else
+		{
+			time = 0;
+			patience--;
+			return "Seems that you don't want to talk about this topic, let's change then or leave"; 
+		}
+		return response;
+	}
+	private String worldThreadtwo(String statement)
+	{
+		String response = "";
+		if((findKeyword(statement,"crazy",0)>=0)||(findKeyword(statement,"strange",0)>=0))
+		{
+			response = "Am I not wrong";
+			time = 16;
+		}
+		else
+		{
+			time = 0;
+			response = "Whatever, lets change topics or you can leave";
+		}
+		return response;
+	}
+	private String realityEnd(String statement)
+	{
+		time = 0;
+		deepthoughts++;
+		return "I think we had a good talk, but now we can change topics or you can leave";
+	}
+	private String worldThreadthree(String statement)
+	{
+		String response = "";
+		if(findKeyword(statement,"like",0)>=0)
+		{
+			response = "Interesting but is there a reason why";
+			time = 16;
+		}
+		else
+		{
+			time = 0;
+			response = "Whatever, lets change topics or you can leave";
+		}
+		return response;
+	}
+	private String noPatience()
+	{
+		return "I am done with you, I want you to leave and never want to see you back here";
+	}
+	private String goodThoughts()
+	{
+		return "Wow. This has been a really productive session with you I hope we can meet again but for now we are done. I hope you feel better about your existence";
+	}
 	private int findKeyword(String statement, String goal,int startPos)
 	{
 		String phrase = statement.trim().toLowerCase();
