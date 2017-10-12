@@ -21,7 +21,6 @@ public class ChatBotRunner
 			String response = sc.nextLine();
 			
 			if(response.equals("1") || response.toLowerCase().equals("existence")) {
-				System.out.println("work");
 				ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
 				//ChatBotPhillips chatbot2 = new ChatBotPhillips();
 				

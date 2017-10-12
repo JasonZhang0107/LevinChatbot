@@ -12,7 +12,6 @@ public class ChatBotPhillips {
 	{
 		boolean responded = false;
 		String response = "";
-		
 		while (!responded) 
 		{
 		if (statement.length() == 0)
@@ -34,8 +33,26 @@ public class ChatBotPhillips {
 					patience--;
 					response = "Say something, please.";
 				}
+				responded = true;
 			}
-			if(findKeyword(statement, "yes") >= 0|| findKeyword(statement, "yeah")>= 0||findKeyword(statement, "yep")>=0||findKeyword(statement, "kind of")>=0|| findKeyword(statement, "ye")>= 0|| findKeyword(statement, "sort of")>= 0)
+		else if(findKeyword (statement, "My name is")>=0) {
+			
+				int psn = findKeyword (statement.toLowerCase(), "my name is");
+				System.out.println(statement.substring(psn));
+				name = statement.substring(psn+10).trim();
+				if(question == "name")
+				{
+					name = statement;
+					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
+					question = "relations";
+				}
+				else
+				{
+					response = "I already know your name, "+name;
+				}
+				responded = true;
+		}
+			else if(findKeyword(statement, "yes") >= 0|| findKeyword(statement, "yeah")>= 0||findKeyword(statement, "yep")>=0||findKeyword(statement, "kind of")>=0|| findKeyword(statement, "ye")>= 0|| findKeyword(statement, "sort of")>= 0)
 			{
 				if(question == "name")
 				{
@@ -71,7 +88,7 @@ public class ChatBotPhillips {
 					name = statement;
 					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
 					question = "relations";
-					if(name.toLowerCase() == "levin")
+					if(findKeyword(name, "levin")>= 0||findKeyword(name, "nathan")>= 0)
 					{
 						response = "Oh, Mr. Levin! Sorry I didn't recognize you! You probably don't need relationship advice, but I'll ask anyway:\nAre you currently in a relationship with someone?";
 					}
