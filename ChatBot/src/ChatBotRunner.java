@@ -11,55 +11,71 @@ public class ChatBotRunner
 	/**
 	 * Create instances of each chatbot, give it user input, and print its replies. Switch chatbot responses based on which chatbot the user is speaking too.
 	 */
+	static boolean chosen = false;
 	public static void main(String[] args)
 	{
-		/*boolean chosen = false;
-		System.out.print("Hello Sonny, which bot would you like to use?\n-Pick a number below.\n\n1-Existence Bot\n2-Fitness Bot\n3-Romance Bot\n4-TherapistThatNeedsTherapy Bot");
-		Scanner in = new Scanner (System.in);
-		String response = in.nextLine();
-		
 		while(!chosen) {
-			chosen = true;
-			if(response == "1") {
+			System.out.print("Hello Sonny, which bot would you like to use?\nChoose a bot below.\n	1-Existence Bot\n	2-Romance Bot\n	3-Fitness Bot\n	4-TherapistThatNeedsTherapy Bot\n");
+			
+			Scanner sc = new Scanner(System.in);
+			String response = sc.nextLine();
+			
+			if(response.equals("1") || response.toLowerCase().equals("existence")) {
+				System.out.println("work");
 				ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
 				//ChatBotPhillips chatbot2 = new ChatBotPhillips();
 				
 				System.out.println (chatbot1.getGreeting());
-				String statement = in.nextLine();
-				
-
-
+				String statement = sc.nextLine();
 				while (!statement.toLowerCase().equals("bye"))
 				{
 					System.out.println (chatbot1.getResponse(statement));
-					statement = in.nextLine();
+					statement = sc.nextLine();
 				}
 			}
-			else if(response == "2") {
+			else if(response.equals("2")|| response.toLowerCase().equals("romance")) {
+				
 				ChatBotPhillips chatbot2 = new ChatBotPhillips();
 				
 				System.out.println (chatbot2.getGreeting());
-				String statement = in.nextLine();
-				
-
-
+				String statement = sc.nextLine();
 				while (!statement.toLowerCase().equals("bye"))
 				{
 					System.out.println (chatbot2.getResponse(statement));
-					statement = in.nextLine();
+					statement = sc.nextLine();
 				}
 			}
-			else if(response == "3") {
-				//
+			else if(response.equals("3")|| response.toLowerCase().equals("fitness")) {
+				
+				ChatBotZhang chatbot3 = new ChatBotZhang();
+				
+				System.out.println (chatbot3.getGreeting());
+				String statement = sc.nextLine();
+				while (!statement.toLowerCase().equals("bye"))
+				{
+					System.out.println (chatbot3.getResponse(statement));
+					statement = sc.nextLine();
+				}
 			}
-			else if(response == "4") {
-				//
+			else if(response.equals("4")|| response.toLowerCase().equals("therapy")|| response.toLowerCase().equals("therapistthatneedstherapy")) {
+				
+				ChatBotGuan chatbot4 = new ChatBotGuan();
+				
+				System.out.println (chatbot4.getGreeting());
+				String statement = sc.nextLine();
+				while (!statement.toLowerCase().equals("bye"))
+				{
+					System.out.println (chatbot4.getResponse(statement));
+					statement = sc.nextLine();
+				}
 			}
 			else {
-				System.out.println("Please choose a number");
 				chosen = false;
-			}*/
-		ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
+				System.out.println("Please choose an option.");
+				
+			}
+		/*
+		 * ChatBotAhnaf chatbot1 = new ChatBotAhnaf();
 		System.out.println(chatbot1.getGreeting());
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
@@ -69,7 +85,8 @@ public class ChatBotRunner
 			System.out.println (chatbot1.getResponse(statement));
 			statement = in.nextLine();
 		}
+		*/
 
+		}
 	}
-	
 }
