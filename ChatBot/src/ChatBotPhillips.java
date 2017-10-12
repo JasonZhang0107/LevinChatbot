@@ -22,7 +22,7 @@ public class ChatBotPhillips {
 				}
 				else if(patience < 4)
 				{
-					response = "I need you to say something,"+name;
+					response = "I need you to say something.";
 				}
 				else if (patience < 7)
 				{
@@ -34,29 +34,25 @@ public class ChatBotPhillips {
 					response = "Say something, please.";
 				}
 				responded = true;
-			}
-		else if(findKeyword (statement, "My name is")>=0) {
-			
-				int psn = findKeyword (statement.toLowerCase(), "my name is");
-				System.out.println(statement.substring(psn));
-				name = statement.substring(psn+10).trim();
-				if(question == "name")
-				{
-					name = statement;
-					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
-					question = "relations";
-				}
-				else
-				{
-					response = "I already know your name, "+name;
-				}
-				responded = true;
-		}
-			else if(findKeyword(statement, "yes") >= 0|| findKeyword(statement, "yeah")>= 0||findKeyword(statement, "yep")>=0||findKeyword(statement, "kind of")>=0|| findKeyword(statement, "ye")>= 0|| findKeyword(statement, "sort of")>= 0)
+				}	
+			else if(question != "looper"&&(findKeyword(statement.toLowerCase(), "yes") >= 0|| findKeyword(statement, "yeah")>= 0||findKeyword(statement, "yep")>=0||findKeyword(statement, "kind of")>=0|| findKeyword(statement, "ye")>= 0|| findKeyword(statement, "sort of")>= 0))
 			{
+				name = statement;
+				if(findKeyword (statement.toLowerCase(), "My name is")>=0) {
+					
+					if(question == "name")
+					{
+						name = statement.substring(11);
+					}
+					else
+					{
+						response = "I already know your name, ";
+					}
+				responded = true;
+				}
 				if(question == "name")
 				{
-					name = statement;
+					
 					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
 					question = "relations";
 				}
@@ -68,32 +64,45 @@ public class ChatBotPhillips {
 					}
 				else if(question == "interested"&&inRelationShip) 
 				{
-					response = "I hope I can help! Are you having problems with your current relationship?";
-					question = "problems";
+					response = "I hope I can help! What do you want to talk about?";
+					question = "looper";
 				}
 				else if(question == "interested"&&!inRelationShip) 
 				{
-					response = "Great! Hopefully I can help. \nIs this person a close friend?";
-					
+					response = "Great! Hopefully I can help. \nWhat do you want to talk about?";
+					question = "looper";
 				}
 				else if(question == "noRes") {
-					response = "You can type 'Bye' to exit the chat bot.";
+					response = "You can type 'Bye' to exit this chat bot.";
+					
+				}
+				else if (question == "listening") {
+					response = "That's good to hear";
 				}
 				responded = true;
 			}
-			else
+			else if(question != "looper"&&(findKeyword(statement.toLowerCase(), "no") >= 0|| findKeyword(statement, "never")>= 0||findKeyword(statement, "nah")>=0||findKeyword(statement, "negative")>=0)||findKeyword(statement,"nope")>=0)
 			{
+				name = statement;
 				if(question == "name")
 				{
-					name = statement;
+					if(findKeyword (statement.toLowerCase(), "My name is")>=0&&question == "name") 
+					{
+							name = name.substring(11);
+					}
+					else
+					{
+						name = statement;
+					}
 					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
 					question = "relations";
 					if(findKeyword(name, "levin")>= 0||findKeyword(name, "nathan")>= 0)
 					{
 						response = "Oh, Mr. Levin! Sorry I didn't recognize you! You probably don't need relationship advice, but I'll ask anyway:\nAre you currently in a relationship with someone?";
 					}
+					responded = true;
 				}
-
+				
 				else if(question == "relations") 
 				{
 					inRelationShip = false;
@@ -103,15 +112,137 @@ public class ChatBotPhillips {
 				}
 				else if(question == "interested") 
 				{
-					response = name+", I'm not sure that I can help you in that case. Might I reccomend another bot, such as Ahnaf's Existence Bot?";
+					response = "I'm not sure that I can help you in that case. Might I reccomend another bot, such as Ahnaf's Existence Bot?";
 					question = "noRes";
 				}
 				else if(question == "noRes") {
-					response = "You can type 'Bye' to exit the chat bot.";
+					response = "You can type 'Bye' to exit this chat bot.";
+					
 				}
-
+				else if (question == "listening") {
+					response = "That's good to hear";
+					responded = true;
+				}
 				responded = true;
-			}	
+			}
+			else {
+				if(question == "name")
+				{
+					if(findKeyword (statement.toLowerCase(), "My name is")>=0&&question == "name") 
+					{
+							name = statement.substring(11);
+					}
+					else if(findKeyword (statement.toLowerCase(), "i'm")>=0&&question == "name") 
+					{
+							name = statement.substring(4);
+					}
+					else
+					{
+						name = statement;
+					}
+					response = "Hi, "+name+", I presume you came to see me for relationship advice.\nAre you currently in a relationship with someone?";
+					question = "relations";
+					if(findKeyword(name, "levin")>= 0||findKeyword(name, "nathan")>= 0)
+					{
+						response = "Oh, Mr. Levin! Sorry, I didn't recognize you! You probably don't need relationship advice, but I'll ask anyway:\nAre you currently in a relationship with someone?";
+					}
+					responded = true;
+				}
+				
+				else if (question == "listening") {
+					response = "That's good to hear";
+					question = "looper";
+					responded = true;
+				}
+				
+				else if(question == "looper") {
+					if(findKeyword(statement.toLowerCase(), "nothing" )>=0||findKeyword(statement.toLowerCase(), "not much")>=0)
+					{
+						response = "I can't really help you if you don't talk to me.";
+					}
+					else if(findKeyword(statement.toLowerCase(), "nervous")>=0&&!inRelationShip) 
+					{
+						response = "Being nervous is natural, lots of people feel nervous.";
+					}
+					else if(findKeyword(statement.toLowerCase(), "uh" )>=0||findKeyword(statement.toLowerCase(), "..." )>=0) {
+						response = "You can get whatever you want off your chest, talk to me.";
+					}
+					else if(findKeyword(statement.toLowerCase(), "angry" )>=0 && inRelationShip) 
+					{
+						response = "If you make each other angry, I would recommend talking to each other about it, or going to couple's counseling.";
+					}
+					else if(findKeyword(statement.toLowerCase(), "hurt" )>=0||findKeyword(statement.toLowerCase(), "hit" )>=0||findKeyword(statement.toLowerCase(), "beat" )>=0||findKeyword(statement.toLowerCase(), "abuse" )>=0)
+					{
+						response = "If your partner has hit you or hurt you, I think you should break up with them. Abuse is unacceptable.";
+					}
+					else if(findKeyword(statement.toLowerCase(), "kms" )>=0||findKeyword(statement.toLowerCase(), "kill" )>=0||findKeyword(statement.toLowerCase(), "die" )>=0||findKeyword(statement.toLowerCase(), "murder")>=0||findKeyword(statement.toLowerCase(), "death" )>=0)
+					{
+						response = "Let's talk about something more positive, okay? Don't let the bad times drag you down.";
+					}
+					else if (findKeyword(statement, "I want to") >= 0)
+					{
+						statement = statement.trim();
+						String lastChar = statement.substring(statement
+								.length() - 1);
+						if (lastChar.equals("."))
+						{
+							statement = statement.substring(0, statement
+									.length() - 1);
+						}
+						int temp = findKeyword (statement, "I want to", 0);
+						String restOfStatement = statement.substring(temp + 9).trim();
+						response = "Why do you want to " + restOfStatement + "?";
+					}
+					else if (findKeyword(statement.toLowerCase(), "not sure" )>=0||findKeyword(statement.toLowerCase(), "don't know")>=0||findKeyword(statement.toLowerCase(), "dont know")>=0)
+					{
+						response = "Being unsure is fine, don't worry too much about it, alright?";
+					}
+					else if (findKeyword(statement.toLowerCase(), "i like")>=0) 
+					{
+						statement = statement.trim();
+						String lastChar = statement.substring(statement
+								.length() - 1);
+						if (lastChar.equals("."))
+						{
+							statement = statement.substring(0, statement
+									.length() - 1);
+						}
+						int temp = findKeyword (statement, "i like", 0);
+						String restOfStatement = statement.substring(temp + 6).trim();
+						response = "It's good you like " + restOfStatement + ". What do you like most about " + restOfStatement+"?";
+						question = "listening";
+					}
+					else if(findKeyword(statement.toLowerCase(), "i love")>=0)
+					{
+						statement = statement.trim();
+						String lastChar = statement.substring(statement
+								.length() - 1);
+						if (lastChar.equals("."))
+						{
+							statement = statement.substring(0, statement
+									.length() - 1);
+						}
+						int temp = findKeyword (statement, "i love", 0);
+						String restOfStatement = statement.substring(temp + 6).trim();
+						response = "It's good you love " + restOfStatement + ". What do you love most about " + restOfStatement+"?";
+						question = "listening";
+					}
+					else
+					{
+						response = "I'm not exactly sure what that is. Do you want to change the topic?";
+					}
+					
+					responded = true;
+				}
+				else if(question == "noRes") {
+					response = "You can type 'Bye' to exit this chat bot.";
+					responded = true;
+				}
+				else {
+					response = "You didn't answer my question.\n";
+					responded = true;
+				}
+			}
 		}
 		return response;
 	}

@@ -15,7 +15,7 @@ public class ChatBotRunner
 	public static void main(String[] args)
 	{
 		while(!chosen) {
-			System.out.print("Hello Sonny, which bot would you like to use?\nChoose a bot below.\n	1-Existence Bot\n	2-Romance Bot\n	3-Fitness Bot\n	4-TherapistThatNeedsTherapy Bot\n");
+			System.out.print("PLEASE NOTE: NONE OF THESE BOTS ARE SUBSTITUTES FOR AN ACTUAL THERAPIST, PLEASE SEEK OUT HELP IF YOU NEED IT\nHello User, which bot would you like to use?\nChoose a bot below.\n	1-Existence Bot\n	2-Romance Bot\n	3-Fitness Bot\n	4-TherapistThatNeedsTherapy Bot\n");
 			
 			Scanner sc = new Scanner(System.in);
 			String response = sc.nextLine();
